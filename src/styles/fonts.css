@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'CustomFont'; /* Choose a name */
+    src: url('/fonts/Montserrat-Black.ttf') format('truetype')
+         url('/fonts/Montserrat-Bold.ttf') format('truetype'),
+         url('/fonts/Montserrat-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  

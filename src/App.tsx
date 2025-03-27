@@ -11,7 +11,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  const [, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
