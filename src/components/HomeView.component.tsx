@@ -1,6 +1,6 @@
-import { categories } from "../shared/Categories";
+// import { categories } from "../shared/Categories";
 
-const HomeView = ({ onSelectCategory }) => {
+const HomeView = ({ onSelectCategory , categories}) => {
     return (
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl font-bold text-purple-600">Gutenberg Project</h1>
