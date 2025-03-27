@@ -1,12 +1,9 @@
 import axios, { AxiosRequestConfig, Method } from "axios";
 import { RequestParams } from "../types";
 
+/* this is for furture improvements, we can have seperate service file for each of the API calls */
 interface MyData {
-  USER_QUERY: string,
-  SQL_QUERY: string
-  intended_api: string,
-  base64: string,
-  pdf_url: string[]
+  query: string;
 }
 /* Call Request Method to fetch / Post Data  */
 const request = async (requestParams: RequestParams, signal?: AbortSignal) => {

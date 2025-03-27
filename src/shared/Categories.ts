@@ -6,6 +6,8 @@ import humour from '../assets/Humour.svg';
 import adventure from '../assets/Adventure.svg';
 import politics from '../assets/Politics.svg';
 
+// All the categories with their respective icons.
+// NOTE: For further improvements we can also take these names from ENUMS or constants file.
 export const categories = [
   { name: "FICTION", icon: fiction },
   { name: "PHILOSOPHY", icon: philosophy },

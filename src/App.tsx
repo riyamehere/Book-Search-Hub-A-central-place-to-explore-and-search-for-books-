@@ -1,95 +1,62 @@
-import { useEffect, useState, useRef, useCallback } from "react";
-import HomeView from "./components/HomeView.component";
-import CategoryView from "./components/CategoryView.component";
-import "./App.css";
-import { categories } from "./shared/Categories";
-import { throttle } from "lodash"; // Import lodash's throttle
+import NextArrow from "../assets/Next.svg";
+import bgImg from "../assets/Pattern.svg";
 
-let baseURL = import.meta.env.VITE_BASE_URL;
-
-function App() {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [books, setBooks] = useState([]);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
-  useEffect(() => {
-    if (selectedCategory) {
-      fetchBooks(1, "", true);
-    }
-  }, [selectedCategory]);
-
-  // Debounced search API calls
-  useEffect(() => {
-    const delaySearch = setTimeout(() => {
-      fetchBooks(1, search, true);
-    }, 300);
-
-    return () => clearTimeout(delaySearch);
-  }, [search]);
-
-  const fetchBooks = async (pageNum, searchQuery = "", reset = false) => {
-    let url = `${baseURL}/books?topic=${selectedCategory.toLowerCase()}&mime_type=image%2F&page=${pageNum}`;
-    if (searchQuery) url += `&search=${searchQuery}`;
-
-    try {
-      const res = await fetch(url);
-      if (res.status === 404) {
-        setHasMore(false); // Stop further requests if API returns 404
-        return;
-      }
-      const data = await res.json();
-      setBooks((prev) => (reset ? data.results : [...prev, ...data.results]));
-      setHasMore(data.results.length > 0); // If no results, stop further requests
-    } catch (error) {
-      console.error("Error fetching books:", error);
-    }
-  };
-
-  // Throttled API call for infinite scrolling
-  const throttledFetchBooks = useCallback(
-    throttle((nextPage, searchQuery) => {
-      fetchBooks(nextPage, searchQuery);
-    }, 1000), // Throttle API calls to once per second
-    [fetchBooks]
-  );
-
-  // Infinite scroll observer
-  const observer = useRef();
-  const lastBookElementRef = useCallback(
-    (node) => {
-      if (!hasMore) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((prevPage) => {
-            const nextPage = prevPage + 1;
-            throttledFetchBooks(nextPage, search);
-            return nextPage;
-          });
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [hasMore, search, selectedCategory]
-  );
-
-  return (
-    <div className="min-h-screen bg-[#F8F7FF] font-montserrat">
-      {selectedCategory ? (
-        <CategoryView
-          category={selectedCategory}
-          books={books}
-          onBack={() => setSelectedCategory("")}
-          onSearch={setSearch}
-          lastBookElementRef={lastBookElementRef}
-        />
-      ) : (
-        <HomeView categories={categories} onSelectCategory={setSelectedCategory} />
-      )}
-    </div>
-  );
+// Interface for Category type
+interface Category {
+  name: string;
+  icon: string;
 }
 
-export default App;
+// Props interface for HomeView component
+interface HomeViewProps {
+  onSelectCategory: (categoryName: string) => void; // Function to handle category selection
+  categories: Category[]; // Array of categories
+}
+
+const HomeView: React.FC<HomeViewProps> = ({ onSelectCategory, categories }) => {
+  return (
+    <div className="text-left">
+      {/* Background image section */}
+      <div
+        className="bg-cover bg-center"
+        style={{ backgroundImage: `url(${bgImg})` }} // Dynamic background image
+      >
+        <div className="pt-20 pb-10 p-[20%]">
+          {/* Title */}
+          <h1 className="text-3xl sm:text-[48px] font-semibold text-[#5E56E7]">
+            Gutenberg Project
+          </h1>
+          {/* Subtitle / Description */}
+          <p className="text-[#000000] mt-5 text-[14px] sm:text-[16px] font-semibold">
+            A social cataloging website that allows you to freely search its database of books, annotations, 
+            and reviews.
+          </p>
+        </div>
+      </div>
+
+      {/* Category selection grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 px-[20%]">
+        {categories.map((cat) => (
+          <button
+            key={cat.name} // Unique key for each category
+            className="flex items-center justify-between p-3 sm:p-4 bg-white shadow rounded-md text-[18px] sm:text-[20px] font-normal text-[#333333] box-shadow-[0_2px_5px_0_rgba(211,209,238,0.5)]"
+            onClick={() => onSelectCategory(cat.name)} // Handle category selection
+          >
+            {/* Category Name & Icon */}
+            <div className="flex">
+              <img alt={cat.name} src={cat.icon} className="w-7 h-7 mr-4" /> {/* Category Icon */}
+              <span className="font-bold">{cat.name}</span> {/* Category Name */}
+            </div>
+
+            {/* Arrow Icon for Next */}
+            <span className="text-[#5E56E7]">
+              <img alt="Next" src={NextArrow} />
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default HomeView;
