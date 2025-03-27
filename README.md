@@ -11,10 +11,42 @@ https://github.com/user-attachments/assets/28610fa4-bca1-4ae4-86c8-ef24078fd521
 
 This application is built using [React](https://github.com/facebook/react) and JavaScript with [Vite](https://github.com/vitejs/vite).
 
-## Installation and Project Run
+A web application that allows users to browse books by category, search for books, and use infinite scrolling to load more books dynamically.
 
-1. Use *npm i* command to install all the required packages.
-2. Use *npm run dev* to run the app in the development mode.
+## 🚀 Features
+
+### 🔍 Category-Based Book Listing
+- Users can select a category from the home screen.
+- Fetches and displays books related to the selected category.
+
+### 🔎 Search Functionality
+- Users can search for books within the selected category.
+- Implements **debounced search** (300ms delay) to reduce API calls.
+
+### 🔄 Infinite Scrolling
+- Uses **Intersection Observer** to detect when the last book element is visible.
+- Automatically fetches more books when scrolling reaches the end.
+- API calls are **throttled (1 second)** to prevent excessive requests.
+
+### ⚡ Optimized API Calls
+- Uses **throttle (lodash)** to limit API requests.
+- Stops making requests when no more books are available (`hasMore`).
+
+### 🔧 State Management with React Hooks
+- `useState` for managing books, search input, selected category, and pagination.
+- `useEffect` for fetching books on category change and search input.
+
+### 📌 Dynamic Page Rendering
+- **HomeView**: Displays a list of book categories.
+- **CategoryView**: Displays books and handles search & infinite scrolling.
+
+### 🌐 Environment-Based API Configuration
+- Uses **Vite environment variables (`VITE_BASE_URL`)** for API requests.
+
+## Installation and Project Run
+1. Clone the repository and cd to the project directory.
+2. Use *npm i* command to install all the required packages.
+3. Use *npm run dev* to run the app in the development mode.
 
 *Note* : You don't need to install anything seperately.
 
