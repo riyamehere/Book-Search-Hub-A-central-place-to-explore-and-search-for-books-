@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import HomeView from './components/HomeView.component';
 import CategoryView from './components/CategoryView.component';
 import './App.css';
