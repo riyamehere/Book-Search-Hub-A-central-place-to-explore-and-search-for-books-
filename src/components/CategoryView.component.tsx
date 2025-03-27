@@ -82,7 +82,7 @@ const CategoryView: React.FC<CategoryViewProps> = ({ category, books, onBack, on
               />
               {/* Book Title */}
               <p className="text-[10px] sm:text-[12px] lg:text-[14px] font-normal text-[#333333] mt-2">
-                {truncateText(book.title.toUpperCase(), 20)}
+                {truncateText(book.title.toUpperCase(), 36)}
               </p>
               {/* Author Names */}
               <p className="text-[10px] sm:text-[12px] lg:text-[14px] text-[#A0A0A0]">

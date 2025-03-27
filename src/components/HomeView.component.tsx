@@ -1,12 +1,6 @@
 import NextArrow from "../assets/Next.svg";
 import bgImg from "../assets/Pattern.svg";
-import { Category } from "../interfaces/components.interface";
-
-// Props interface for HomeView component
-interface HomeViewProps {
-  onSelectCategory: (categoryName: string) => void; // Function to handle category selection
-  categories: Category[]; // Array of categories
-}
+import { HomeViewProps } from "../interfaces/components.interface";
 
 const HomeView: React.FC<HomeViewProps> = ({ onSelectCategory, categories }) => {
   return (

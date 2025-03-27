@@ -32,5 +32,11 @@ interface BookFormats {
     books: Book[]; // Array of books
     onBack: () => void; // Function to handle back navigation
     onSearch: (query: string) => void; // Function to handle search input
-    lastBookElementRef: (node: HTMLAnchorElement | null) => void; // Intersection observer ref
+    lastBookElementRef: (node: HTMLAnchorElement | null) => void; // Ensure correct type
+}
+
+// Props interface for HomeView component
+export interface HomeViewProps {
+    onSelectCategory: (categoryName: string) => void; // Function to handle category selection
+    categories: Category[]; // Array of categories
   }
