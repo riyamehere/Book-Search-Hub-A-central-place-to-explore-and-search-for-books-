@@ -1,6 +1,8 @@
-# AI Agent for Avensor Stations Frontend React JS
+# Gutenberg Project
 
-This is the front end repository for AI Agent for Avensor Stations in React Javascript working in Vite with HMR and some ESLint rules.
+This is the front end repository for Gutenberg Project in React Javascript working in Vite with HMR and some ESLint rules.
+A social cataloging website that allows you to freely search its database of books, annotations, and reviews.
+
 
 This application is built using [React](https://github.com/facebook/react) and JavaScript with [Vite](https://github.com/vitejs/vite).
 
